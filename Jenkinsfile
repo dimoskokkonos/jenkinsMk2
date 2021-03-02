@@ -42,11 +42,5 @@ rm -rf lib'''
       }
     }
 
-    stage('Upload The 7z') {
-      steps {
-        build '7zUpload'
-      }
-    }
-
   }
 }
