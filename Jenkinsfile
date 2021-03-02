@@ -27,7 +27,8 @@ mv testProjectJenkins-0.1.war testProjectJenkins.war'''
 
     stage('Delete Libs') {
       steps {
-        sh 'pwd'
+        sh '''cd /var/lib/jenkins/workspace/warFileCreation/target/testProjectJenkins/WEB-INF
+rm -rf lib'''
       }
     }
 
