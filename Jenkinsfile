@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Creating WAR file') {
       steps {
-        build 'testingProjectUpload'
+        build 'warFileCreation'
       }
     }
 
