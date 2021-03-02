@@ -5,12 +5,13 @@ pipeline {
       steps {
         sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
 rm -f testProjectJenkins.war
+rm -f testProjectJenkins.7z
 rm -rf testProjectJenkins'''
         build 'warFileCreation'
       }
     }
 
-    stage('Edit War File Name') {
+    stage('Edit Name') {
       steps {
         sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
 mv testProjectJenkins-0.1.war testProjectJenkins.war'''
@@ -29,6 +30,15 @@ mv testProjectJenkins-0.1.war testProjectJenkins.war'''
       steps {
         sh '''cd /var/lib/jenkins/workspace/warFileCreation/target/testProjectJenkins/WEB-INF
 rm -rf lib'''
+      }
+    }
+
+    stage('7zip the folders') {
+      steps {
+        sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
+
+7za a testProjectJenkins.7z testProjectJenkins
+'''
       }
     }
 
