@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
 rm -f testProjectJenkins.war
-rm -f testProjectJenkins'''
+rm -rf testProjectJenkins'''
         build 'warFileCreation'
       }
     }
