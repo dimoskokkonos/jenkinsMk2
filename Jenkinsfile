@@ -25,5 +25,11 @@ mv testProjectJenkins-0.1.war testProjectJenkins.war'''
       }
     }
 
+    stage('Delete Libs') {
+      steps {
+        sh 'pwd'
+      }
+    }
+
   }
 }
