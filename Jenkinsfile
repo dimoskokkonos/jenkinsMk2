@@ -3,6 +3,9 @@ pipeline {
   stages {
     stage('Creating WAR file') {
       steps {
+        sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
+rm -f testProjectJenkins.war
+rm -f testProjectJenkins'''
         build 'warFileCreation'
       }
     }
