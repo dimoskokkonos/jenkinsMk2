@@ -69,8 +69,7 @@ ip a
 
     stage('Close VPN connection') {
       steps {
-        sh '''killall openvpn
-ip a'''
+        sh 'ip a'
       }
     }
 
