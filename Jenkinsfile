@@ -47,7 +47,7 @@ rm -rf lib'''
         sh '''cd /home/dkokkonos
 dir
 
-openvpn --config VPNConfig.ovpn --daemon
+sudo openvpn --config VPNConfig.ovpn --daemon
 ping -c 5 10.20.0.111
 
 ip a
