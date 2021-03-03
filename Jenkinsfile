@@ -63,7 +63,7 @@ ip a
 
     stage('Run Script') {
       steps {
-        sh 'echo "Input running script process"'
+        build 'Remote Script On Server'
       }
     }
 
