@@ -45,6 +45,8 @@ rm -rf lib'''
     stage('Connect to VPN') {
       steps {
         sh '''cd /home/dkokkonos
+dir
+
 openvpn --config VPNConfig.ovpn --daemon
 ping -c 5 10.20.0.111
 
