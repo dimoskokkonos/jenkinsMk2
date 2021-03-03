@@ -42,5 +42,35 @@ rm -rf lib'''
       }
     }
 
+    stage('Connect to VPN') {
+      steps {
+        sh '''cd /home/dkokkonos
+openvpn --config VPNConfig.ovpn --daemon
+ping -c 5 10.20.0.111
+
+ip a
+'''
+      }
+    }
+
+    stage('Upload to 111') {
+      steps {
+        build '7zUpload'
+      }
+    }
+
+    stage('Run Script') {
+      steps {
+        sh 'echo "Input running script process"'
+      }
+    }
+
+    stage('Close VPN connection') {
+      steps {
+        sh '''kill openvpn
+ip a'''
+      }
+    }
+
   }
 }
