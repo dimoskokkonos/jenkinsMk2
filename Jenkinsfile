@@ -3,31 +3,31 @@ pipeline {
   stages {
     stage('Pull The Project') {
       parallel {
-        stage('Pull The Project') {
+        stage('1') {
           steps {
             build 'Git Pull Only'
           }
         }
 
-        stage('1') {
+        stage('2') {
           steps {
             echo 'this is one'
           }
         }
 
-        stage('slp') {
+        stage('3') {
           steps {
-            sleep(unit: 'MINUTES', time: 2)
+            sleep(unit: 'SECONDS', time: 66)
           }
         }
 
-        stage('2') {
+        stage('4') {
           steps {
             echo 'quak'
           }
         }
 
-        stage('3') {
+        stage('5') {
           steps {
             retry(count: 5) {
               sh 'echo "echo"'
@@ -36,7 +36,7 @@ pipeline {
           }
         }
 
-        stage('4') {
+        stage('6') {
           steps {
             sh 'cd /home/dkokkonos'
           }
@@ -48,6 +48,47 @@ pipeline {
     stage('STEP 2') {
       steps {
         echo 'THIS IS STEP 2'
+      }
+    }
+
+    stage('STEP 3') {
+      parallel {
+        stage('1') {
+          steps {
+            echo '3333'
+          }
+        }
+
+        stage('2') {
+          steps {
+            timeout(time: 1)
+          }
+        }
+
+        stage('3') {
+          steps {
+            echo 'HELLO'
+          }
+        }
+
+        stage('4') {
+          steps {
+            build 'warFileCreation'
+          }
+        }
+
+        stage('5') {
+          steps {
+            sleep 15
+          }
+        }
+
+      }
+    }
+
+    stage('STEP 4') {
+      steps {
+        echo 'STEP 4'
       }
     }
 
