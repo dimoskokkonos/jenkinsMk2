@@ -61,19 +61,5 @@ ip a
       }
     }
 
-    stage('Run Script') {
-      steps {
-        build 'Remote Script On Server'
-      }
-    }
-
-    stage('Close VPN connection') {
-      steps {
-        sh '''ip a
-sudo killall openvpn
-'''
-      }
-    }
-
   }
 }
