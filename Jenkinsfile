@@ -69,7 +69,9 @@ ip a
 
     stage('Close VPN connection') {
       steps {
-        sh 'ip a'
+        sh '''ip a
+sudo killall openvpn
+'''
       }
     }
 
