@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('Run PipeLine') {
+      steps {
+        build 'jenkinsMk2'
+      }
+    }
+
   }
 }
