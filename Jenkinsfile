@@ -2,91 +2,52 @@ pipeline {
   agent any
   stages {
     stage('Pull The Project') {
-      steps {
-        build 'Git Pull Only'
-      }
-    }
+      parallel {
+        stage('Pull The Project') {
+          steps {
+            build 'Git Pull Only'
+          }
+        }
 
-    stage('Run PipeLine') {
-      steps {
-        script {
+        stage('1') {
+          steps {
+            echo 'this is one'
+          }
+        }
 
-          agent any
-          stages {
-            stage('Creating WAR file') {
-              steps {
-                sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
-rm -f testProjectJenkins.war
-rm -f testProjectJenkins.7z
-rm -rf testProjectJenkins'''
-                build 'warFileCreation'
-              }
-            }
+        stage('slp') {
+          steps {
+            sleep(unit: 'MINUTES', time: 2)
+          }
+        }
 
-            stage('Edit Name') {
-              steps {
-                sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
-mv testProjectJenkins-0.1.war testProjectJenkins.war'''
-              }
-            }
+        stage('2') {
+          steps {
+            echo 'quak'
+          }
+        }
 
-            stage('Unzip') {
-              steps {
-                sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
-7za x testProjectJenkins.war -otestProjectJenkins
-'''
-              }
-            }
-
-            stage('Delete Libs') {
-              steps {
-                sh '''cd /var/lib/jenkins/workspace/warFileCreation/target/testProjectJenkins/WEB-INF
-rm -rf lib'''
-              }
-            }
-
-            stage('7zip the folders') {
-              steps {
-                sh '''cd /var/lib/jenkins/workspace/warFileCreation/target
-7za a testProjectJenkins.7z testProjectJenkins
-'''
-              }
-            }
-
-            stage('Connect to VPN') {
-              steps {
-                sh '''cd /home/dkokkonos
-dir
-sudo openvpn --config VPNConfig.ovpn --daemon
-ping -c 5 10.20.0.111
-ip a
-'''
-              }
-            }
-
-            stage('Upload to 111') {
-              steps {
-                build '7zUpload'
-              }
-            }
-
-            stage('Run Script') {
-              steps {
-                build 'Remote Script On Server'
-              }
-            }
-
-            stage('Close VPN connection') {
-              steps {
-                sh '''ip a
-sudo killall openvpn
-'''
-              }
+        stage('3') {
+          steps {
+            retry(count: 5) {
+              sh 'echo "echo"'
             }
 
           }
         }
 
+        stage('4') {
+          steps {
+            sh 'cd /home/dkokkonos'
+          }
+        }
+
+      }
+    }
+
+    stage('STEP 2') {
+      steps {
+        echo 'THIS IS STEP 2'
       }
     }
 
